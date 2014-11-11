@@ -14,7 +14,7 @@ public class SampleController {
 	@Autowired
 	private CustomerRepository repository;
 	
-    @RequestMapping("/")
+    @RequestMapping("/customer")
     public List<Customer> index() {
     	
     	repository.deleteAll();
