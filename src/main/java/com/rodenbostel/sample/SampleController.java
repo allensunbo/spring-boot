@@ -5,7 +5,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
  
 @RestController
 
@@ -15,7 +17,7 @@ public class SampleController {
 	private CustomerRepository repository;
 	
     @RequestMapping("/customer")
-    public List<Customer> index() {
+    public List<Customer> customer() {
     	
     	repository.deleteAll();
 
@@ -48,5 +50,27 @@ public class SampleController {
 		
         return customers;
     }
+    
+    @RequestMapping(value = "/timer", method = RequestMethod.GET)
+	public ModelAndView hello() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("timer");
+
+		String str = "Hello World!";
+		mav.addObject("message", str);
+
+		return mav;
+	}
+	
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public ModelAndView index() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("index");
+
+		String str = "Hello World!";
+		mav.addObject("message", str);
+
+		return mav;
+	}
  
 }
