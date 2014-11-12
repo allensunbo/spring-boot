@@ -27,6 +27,13 @@ public class Order {
 		
 	}
 	
+	public Order (String customerName, List<String> orderItems) {
+		this.customerName = customerName;
+		this.orderTime = new DateTime();
+		this.orderItems = orderItems;
+		
+	}
+	
 	public String getId() {
 		return id;
 	}
