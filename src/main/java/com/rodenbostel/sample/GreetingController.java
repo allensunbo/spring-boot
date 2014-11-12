@@ -3,7 +3,6 @@ package com.rodenbostel.sample;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class GreetingController {
@@ -13,5 +12,4 @@ public class GreetingController {
 		// Thread.sleep(3000); // simulated delay
 		return new Greeting("Hello, " + message.getName() + "!");
 	}
-
 }
