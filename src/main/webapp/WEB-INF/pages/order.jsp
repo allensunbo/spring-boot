@@ -20,7 +20,7 @@
 			setConnected(true);
 			console.log('Connected: ' + frame);
 			stompClient.subscribe('/topic/order', function(greeting) {
-				showGreeting(JSON.parse(greeting.body).content);
+				showGreeting(JSON.parse(greeting.body));
 			});
 		});
 	}
@@ -29,30 +29,39 @@
 		setConnected(false);
 		console.log("Disconnected");
 	}
-	function send() {
-		setInterval(function(){
-		var name = +new Date();	
+	function sendName() {
+		var name = document.getElementById('name').value;
 		stompClient.send("/app/order", {}, JSON.stringify({
 			'name' : name
-		}))}, 2000);
+		}));
 	}
-	function showGreeting(message) {
+	function showGreeting(messages) {
 		var response = document.getElementById('response');
-		var p = document.createElement('p');
-		p.style.wordWrap = 'break-word';
-		p.appendChild(document.createTextNode(message));
-		response.appendChild(p);
+		document.getElementById('response').innerHTML="";
+		for(m in messages) {
+			var p = document.createElement('p');
+			p.style.wordWrap = 'break-word';
+			p.appendChild(document.createTextNode(messages[m].customerName+'|'+messages[m].orderItems));
+			response.appendChild(p);
+		}
 	}
 </script>
 </head>
 <body>
+	<noscript>
+		<h2 style="color: #ff0000">Seems your browser doesn't support
+			Javascript! Websocket relies on Javascript being enabled. Please
+			enable Javascript and reload this page!</h2>
+	</noscript>
 	<div>
 		<div>
 			<button id="connect" onclick="connect();">Connect</button>
 			<button id="disconnect" disabled="disabled" onclick="disconnect();">Disconnect</button>
 		</div>
 		<div id="conversationDiv">
-			<button id="send" onclick="send();">Send</button>
+			<label>What is your name?</label><input type="text" id="name" />
+			<button id="sendName" onclick="sendName();">Send</button>
+			<p id="response"></p>
 		</div>
 	</div>
 </body>
