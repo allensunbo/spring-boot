@@ -34,6 +34,8 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-websocket")
 	compile("org.springframework:spring-messaging")
     providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+    compile("joda-time:joda-time:2.2")
+    compile("com.google.guava:guava:18.0")
     testCompile("junit:junit")
 }
  
