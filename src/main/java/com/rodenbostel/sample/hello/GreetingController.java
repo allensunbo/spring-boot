@@ -1,4 +1,4 @@
-package com.rodenbostel.sample;
+package com.rodenbostel.sample.hello;
 
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;

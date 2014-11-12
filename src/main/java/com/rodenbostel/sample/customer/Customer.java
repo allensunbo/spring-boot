@@ -1,4 +1,4 @@
-package com.rodenbostel.sample;
+package com.rodenbostel.sample.customer;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

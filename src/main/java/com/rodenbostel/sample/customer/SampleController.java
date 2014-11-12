@@ -1,4 +1,4 @@
-package com.rodenbostel.sample;
+package com.rodenbostel.sample.customer;
  
 import java.util.ArrayList;
 import java.util.List;
