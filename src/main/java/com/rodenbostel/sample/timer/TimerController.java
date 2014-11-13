@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 public class TimerController {
 
-    @RequestMapping(value = "/rest/timer", method = RequestMethod.GET)
+    @RequestMapping(value = "/timer", method = RequestMethod.GET)
 	public ModelAndView hello() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("timer");

@@ -36,7 +36,7 @@ public class OrderWSController {
 		return map;
 	}
 	
-	@RequestMapping(value = "/rest/order", method = RequestMethod.GET)
+	@RequestMapping(value = "/order", method = RequestMethod.GET)
 	public ModelAndView index() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("order");
