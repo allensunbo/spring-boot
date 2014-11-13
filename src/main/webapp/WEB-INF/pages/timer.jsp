@@ -30,7 +30,7 @@
 		var name = +new Date();	
 		stompClient.send("/ws/order", {}, JSON.stringify({
 			'name' : name
-		}))}, 2000);
+		}))}, 1000);
 	}
 
 </script>

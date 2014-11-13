@@ -36,17 +36,32 @@
 	function showOrders(messages) {
 		var response = document.getElementById('response');
 		document.getElementById('response').innerHTML="";
-		for(customer in messages) {
-			for(order in messages[customer]) {
-				var p = document.createElement('p');
-				p.style.wordWrap = 'break-word';
-				p.appendChild(document.createTextNode(messages[customer][order].customerName+'|'+messages[customer][order].orderItems));
-				response.appendChild(p);	
-			}
-			
+		var data = [];
+		var customers = Object.keys(messages);
+		for(var i=0;i<customers.length;i++) {
+			data[i] = 0;
 		}
 		
-		chart.series[0].setData([129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4, 29.9, 71.5, 106.4] );
+		for(customer in messages) {
+			for(order in messages[customer]) {
+				var index = customers.indexOf(messages[customer][order].customerName);
+				data[index]++;
+				/* var p = document.createElement('p');
+				p.style.wordWrap = 'break-word';
+				p.appendChild(document.createTextNode(messages[customer][order].customerName+'|'+messages[customer][order].orderItems));
+				response.appendChild(p);	 */
+			}
+		}
+		/* var data = [];
+		for(var i=0;i<10;i++) {
+		     data.push(Math.random()*100); 
+		}
+		 */
+		 
+		 for(var i=0;i<customers.length;i++) {
+				data[i] = data[i] /  Math.max.apply(null, data);
+			} 
+		chart.series[0].setData(data);
 	}
 	
 	$(function () {
@@ -55,35 +70,12 @@
 	    		renderTo: 'container'
 	    	}, 
 	        title: {
-	            text: 'Monthly Average Temperature',
+	            text: 'Order',
 	            x: -20 //center
 	        },
-	        subtitle: {
-	            text: 'Source: WorldClimate.com',
-	            x: -20
-	        },
-	        xAxis: {
-	            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-	                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-	        },
 	        yAxis: {
-	            title: {
-	                text: 'Temperature (°C)'
-	            },
-	            plotLines: [{
-	                value: 0,
-	                width: 1,
-	                color: '#808080'
-	            }]
-	        },
-	        tooltip: {
-	            valueSuffix: '°C'
-	        },
-	        legend: {
-	            layout: 'vertical',
-	            align: 'right',
-	            verticalAlign: 'middle',
-	            borderWidth: 0
+	        	max: 1,
+	        	min:0.5
 	        },
 	        series: [{}]
 	    });
