@@ -33,11 +33,14 @@
 	function showOrders(messages) {
 		var response = document.getElementById('response');
 		document.getElementById('response').innerHTML="";
-		for(m in messages) {
-			var p = document.createElement('p');
-			p.style.wordWrap = 'break-word';
-			p.appendChild(document.createTextNode(messages[m].customerName+'|'+messages[m].orderItems));
-			response.appendChild(p);
+		for(customer in messages) {
+			for(order in messages[customer]) {
+				var p = document.createElement('p');
+				p.style.wordWrap = 'break-word';
+				p.appendChild(document.createTextNode(messages[customer][order].customerName+'|'+messages[customer][order].orderItems));
+				response.appendChild(p);	
+			}
+			
 		}
 	}
 </script>

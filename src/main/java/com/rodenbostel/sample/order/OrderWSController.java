@@ -1,7 +1,8 @@
 package com.rodenbostel.sample.order;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.common.collect.Maps;
+
 @Controller
 public class OrderWSController {
 	
@@ -19,12 +22,18 @@ public class OrderWSController {
 	
 	@MessageMapping("/order")
 	@SendTo("/topic/order")
-	public List<Order> greeting() throws Exception {
-		List<Order> orders = new ArrayList<Order>();
-		for (Order order : repository.findAll()) {
-			orders.add(order);
-		}		
-		return orders;
+	public Map<String, List<Order>> allOrders() throws Exception {
+		List<Order> orders = repository.findAll();
+		Map<String, List<Order>> map = Maps.newHashMap();
+		for (Order order : orders) {
+			String customerName = order.getCustomerName();
+			if(map.get(customerName) == null) {
+				map.put(customerName, new LinkedList<Order>());
+			}
+			map.get(customerName).add(order);
+		}
+		
+		return map;
 	}
 	
 	@RequestMapping(value = "/rest/order", method = RequestMethod.GET)
