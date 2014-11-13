@@ -20,16 +20,14 @@ import com.rodenbostel.sample.order.OrderRepository;
 @EnableScheduling
 public class OrderGenerator {
 
-	private static final SimpleDateFormat dateFormat = new SimpleDateFormat(
-			"HH:mm:ss");
-
 	@Autowired
 	private OrderRepository repository;
 	
 	List<String> products = Lists.newArrayList();
+	
 	int numOfCustomers = 20;
+	
 	Random r = new Random();
-
 	
 	// @Scheduled(fixedRateString="#{T(java.lang.Long).MAX_VALUE}")
 	@Scheduled(fixedRate = 1000000000) 

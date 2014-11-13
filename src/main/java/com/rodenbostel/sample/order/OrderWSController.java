@@ -27,13 +27,13 @@ public class OrderWSController {
 		return orders;
 	}
 	
-	@RequestMapping(value = "/order", method = RequestMethod.GET)
+	@RequestMapping(value = "/rest/order", method = RequestMethod.GET)
 	public ModelAndView index() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("order");
 
-		String str = "Hello World!";
-		mav.addObject("message", str);
+		/*String str = "Hello World!";
+		mav.addObject("message", str);*/
 
 		return mav;
 	}

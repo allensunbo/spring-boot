@@ -2,8 +2,8 @@
 <html>
 <head>
 <title>Hello WebSocket</title>
-<script src="sockjs-0.3.4.js"></script>
-<script src="stomp.js"></script>
+<script src="/sockjs-0.3.4.js"></script>
+<script src="/stomp.js"></script>
 <script type="text/javascript">
 	var stompClient = null;
 	function setConnected(connected) {
@@ -20,7 +20,7 @@
 			setConnected(true);
 			console.log('Connected: ' + frame);
 			stompClient.subscribe('/topic/order', function(greeting) {
-				showGreeting(JSON.parse(greeting.body));
+				showOrders(JSON.parse(greeting.body));
 			});
 		});
 	}
@@ -29,13 +29,8 @@
 		setConnected(false);
 		console.log("Disconnected");
 	}
-	function sendName() {
-		var name = document.getElementById('name').value;
-		stompClient.send("/app/order", {}, JSON.stringify({
-			'name' : name
-		}));
-	}
-	function showGreeting(messages) {
+
+	function showOrders(messages) {
 		var response = document.getElementById('response');
 		document.getElementById('response').innerHTML="";
 		for(m in messages) {
@@ -59,8 +54,6 @@
 			<button id="disconnect" disabled="disabled" onclick="disconnect();">Disconnect</button>
 		</div>
 		<div id="conversationDiv">
-			<label>What is your name?</label><input type="text" id="name" />
-			<button id="sendName" onclick="sendName();">Send</button>
 			<p id="response"></p>
 		</div>
 	</div>

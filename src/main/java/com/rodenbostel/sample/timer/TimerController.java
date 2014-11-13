@@ -12,25 +12,17 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 public class TimerController {
 
-    @RequestMapping(value = "/timer", method = RequestMethod.GET)
+    @RequestMapping(value = "/rest/timer", method = RequestMethod.GET)
 	public ModelAndView hello() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("timer");
-
-		String str = "Hello World!";
-		mav.addObject("message", str);
-
 		return mav;
 	}
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView index() {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("index");
-
-		String str = "Hello World!";
-		mav.addObject("message", str);
-
+		mav.setViewName("order");
 		return mav;
 	}
 }
